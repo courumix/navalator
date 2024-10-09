@@ -19,7 +19,7 @@ function initialisegrille(){
     return $grille;
 }
 
-function tire($l,$c,&$grille){
+function tire($l,$c,$grille){
     $grille[$l][$c]=1;
 }
 
@@ -28,7 +28,7 @@ affichetab($grilleJ1,10,10);
 tire(2,2,$grilleJ1);
 affichetab($grilleJ1,10,10);
 
-function positionnetorpilleur(&$grille){
+function positionnetorpilleur($grille){
     $l=(int)readline("Sur quelle ligne voulez vous positionner le torpilleur ? ");
     $c=(int)readline("Sur quelle colonne voulez vous positionner le torpilleur ? ");
     $position=readline("voulez-vous postionner le torpilleur en horizontal ? (o/n) ");
