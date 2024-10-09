@@ -1,52 +1,33 @@
 <?php
 
-function positionneporteavions(&$grille): void {
-    $l = (int)readline("Sur quelle ligne voulez vous positionner le torpilleur ? : ");
-    $c = (int)readline("Sur quelle colonne voulez vous positionner le torpilleur ? : ");
-    $longueur_porteavions = 5; // longueur du porte avions
-
-    if ($l < 0 || $l >= count($grille) || $c < 0 || $c >= count($grille[0])) {
-        echo "Coordonnées en dehors du tableau\n";
-        return;
+function positionneporteavion(&$grille){
+    $l = (int)readline("Sur quelle ligne voulez vous positionner le porte avion ? : ");
+    $c = (int)readline("Sur quelle colonne voulez vous positionner le porte avion ? : ");
+    $position = readline("voulez-vous postionner le porte avion en horizontal ? (o/n) : ");
+    if($position == "o"){
+        if($grille[$l][$c] == "." and $grille[$l][$c+1] == "." and $grille[$l][$c+2] == "." and $grille[$l][$c+3] == "." and $grille[$l][$c+4] == "."){
+            $grille[$l][$c] = "H";
+            $grille[$l][$c+1] = "P";
+            $grille[$l][$c+2] = "P";
+            $grille[$l][$c+3] = "P";
+            $grille[$l][$c+4] = "P";
+        }
+        else{
+            echo "vous ne pouvez pas placer votre bateau ici\n";
+        }
     }
-
-    $position = readline("Voulez-vous positionner le torpilleur en horizontal (o) ou vertical (n)? : ");
-
-    // Valider les espaces suffisants y eviter les colisions
-    if ($position == "o") { // Horizontal
-        if ($c + $longueur_porteavions > count($grille[0])) {
-            echo "Le bateau dépasse de la grille.\n";
-            return;
+    elseif($position == "n"){
+        if($grille[$l][$c] == "." and $grille[$l+1][$c] == "." and $grille[$l+2][$c] == "." and $grille[$l+3][$c] == "." and $grille[$l+4][$c] == "."){
+            $grille[$l][$c] = "H";
+            $grille[$l+1][$c] = "P";
+            $grille[$l+2][$c] = "P";
+            $grille[$l+3][$c] = "P";
+            $grille[$l+4][$c] = "P";
         }
-        for ($i = 0; $i < $longueur_porteavions; $i++) {
-            if ($grille[$l][$c + $i] != ".") {
-                echo "Il y a déjà un bateau à cet endroit.\n";
-                return;
-            }
+        else{
+            echo "vous ne pouvez pas placer votre bateau ici\n";
         }
-        // Placer le bateau de manière horizontale
-        for ($i = 0; $i < $longueur_porteavions; $i++) {
-            $grille[$l][$c + $i] = "T";
-        }
-    } elseif ($position == "n") { // Vertical
-        if ($l + $longueur_porteavions > count($grille)) {
-            echo "Le bateau dépasse de la grille.\n";
-            return;
-        }
-        for ($i = 0; $i < $longueur_porteavions; $i++) {
-            if ($grille[$l + $i][$c] != ".") {
-                echo "Il y a déjà un bateau à cet endroit.\n";
-                return;
-            }
-        }
-        // Placer le bateau de manière verticale
-        for ($i = 0; $i < $longueur_porteavions; $i++) {
-            $grille[$l + $i][$c] = "P";
-        }
-    } else {
-        echo "Choix invalide. Veuillez entrer 'o' ou 'n'.\n";
-        return;
     }
-
-    echo "Le bateau a été placé avec succès!\n";
 }
+
+?>
