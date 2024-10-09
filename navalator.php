@@ -19,19 +19,19 @@ function initialisegrille(){
 }
 
 function tire($l,$c,&$grille){
-    if($grille[$l][$c] == "H" or "T" or "C" or "c" or "P"){
+    if($grille[$l-1][$c-1] == "H" or "T" or "C" or "c" or "P"){
         echo "Toucher";
-        $grille[$l][$c] = "X";
+        $grille[$l-1][$c-1] = "X";
     }
-    elseif($grille[$l][$c] != "H" or "T" or "C" or "c" or "P"){
+    elseif($grille[$l-1][$c-1] != "H" or "T" or "C" or "c" or "P"){
         echo "Plouf";
-        $grille[$l][$c] = "O";
+        $grille[$l-1][$c-1] = "O";
     }
 }
 
 function positionnetorpilleur(&$grille){
-    $l = (int)readline("Sur quelle ligne voulez vous positionner le torpilleur ? : ");
-    $c = (int)readline("Sur quelle colonne voulez vous positionner le torpilleur ? : ");
+    $l = (int)readline("Sur quelle ligne voulez vous positionner le torpilleur ? : ") -1;
+    $c = (int)readline("Sur quelle colonne voulez vous positionner le torpilleur ? : ") -1;
     $position = readline("voulez-vous postionner le torpilleur en horizontal ? (o/n) : ");
     if($position == "o"){
         if($grille[$l][$c] == "." and $grille[$l][$c+1] == "."){
@@ -54,8 +54,8 @@ function positionnetorpilleur(&$grille){
 }
 
 function positionnecontretorpilleur(&$grille){
-    $l = (int)readline("Sur quelle ligne voulez vous positionner le contre-torpilleur ? : ");
-    $c = (int)readline("Sur quelle colonne voulez vous positionner le contre-torpilleur ? : ");
+    $l = (int)readline("Sur quelle ligne voulez vous positionner le contre-torpilleur ? : ") -1;
+    $c = (int)readline("Sur quelle colonne voulez vous positionner le contre-torpilleur ? : ") -1;
     $position = readline("voulez-vous postionner le contre-torpilleur en horizontal ? (o/n) : ");
     if($position == "o"){
         if($grille[$l][$c] == "." and $grille[$l][$c+1] == "." and $grille[$l][$c+2] == "."){
@@ -80,8 +80,8 @@ function positionnecontretorpilleur(&$grille){
 }
 
 function positionnecroiseur(&$grille){
-    $l = (int)readline("Sur quelle ligne voulez vous positionner le croiseur ? : ");
-    $c = (int)readline("Sur quelle colonne voulez vous positionner le croiseur ? : ");
+    $l = (int)readline("Sur quelle ligne voulez vous positionner le croiseur ? : ") -1;
+    $c = (int)readline("Sur quelle colonne voulez vous positionner le croiseur ? : ") -1;
     $position = readline("voulez-vous postionner le croiseur en horizontal ? (o/n) : ");
     if($position == "o"){
         if($grille[$l][$c] == "." and $grille[$l][$c+1] == "." and $grille[$l][$c+2] == "." and $grille[$l][$c+3] == "."){
@@ -108,8 +108,8 @@ function positionnecroiseur(&$grille){
 }
 
 function positionneporteavion(&$grille){
-    $l = (int)readline("Sur quelle ligne voulez vous positionner le porte avion ? : ");
-    $c = (int)readline("Sur quelle colonne voulez vous positionner le porte avion ? : ");
+    $l = (int)readline("Sur quelle ligne voulez vous positionner le porte avion ? : ") -1;
+    $c = (int)readline("Sur quelle colonne voulez vous positionner le porte avion ? : ") -1;
     $position = readline("voulez-vous postionner le porte avion en horizontal ? (o/n) : ");
     if($position == "o"){
         if($grille[$l][$c] == "." and $grille[$l][$c+1] == "." and $grille[$l][$c+2] == "." and $grille[$l][$c+3] == "." and $grille[$l][$c+4] == "."){
