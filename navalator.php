@@ -19,7 +19,14 @@ function initialisegrille(){
 }
 
 function tire($l,$c,&$grille){
-    $grille[$l][$c]=1;
+    if($grille[$l][$c] == "H" or "M" or "C" or "c" or "P"){
+        echo "Toucher";
+        $grille[$l][$c] = "X";
+    }
+    elseif($grille[$l][$c] != "H" or "M" or "C" or "c" or "P"){
+        echo "Plouf";
+        $grille[$l][$c] = "O";
+    }
 }
 
 function positionnetorpilleur(&$grille){
@@ -39,6 +46,60 @@ function positionnetorpilleur(&$grille){
         if($grille[$l][$c] == "." and $grille[$l+1][$c] == "."){
             $grille[$l][$c] = "H";
             $grille[$l+1][$c] = "T";
+        }
+        else{
+            echo "vous ne pouvez pas placer votre bateau ici\n";
+        }
+    }
+}
+
+function positionnecontretorpilleur(&$grille){
+    $l = (int)readline("Sur quelle ligne voulez vous positionner le contre-torpilleur ? : ");
+    $c = (int)readline("Sur quelle colonne voulez vous positionner le contre-torpilleur ? : ");
+    $position = readline("voulez-vous postionner le contre-torpilleur en horizontal ? (o/n) : ");
+    if($position == "o"){
+        if($grille[$l][$c] == "." and $grille[$l][$c+1] == "." and $grille[$l][$c+2] == "."){
+            $grille[$l][$c] = "H";
+            $grille[$l][$c+1] = "c";
+            $grille[$l][$c+2] = "c";
+        }
+        else{
+            echo "vous ne pouvez pas placer votre bateau ici\n";
+        }
+    }
+    elseif($position == "n"){
+        if($grille[$l][$c] == "." and $grille[$l+1][$c] == "." and $grille[$l+2][$c] == "."){
+            $grille[$l][$c] = "H";
+            $grille[$l+1][$c] = "c";
+            $grille[$l+2][$c] = "c";
+        }
+        else{
+            echo "vous ne pouvez pas placer votre bateau ici\n";
+        }
+    }
+}
+
+function positionnecroiseur(&$grille){
+    $l = (int)readline("Sur quelle ligne voulez vous positionner le croiseur ? : ");
+    $c = (int)readline("Sur quelle colonne voulez vous positionner le croiseur ? : ");
+    $position = readline("voulez-vous postionner le croiseur en horizontal ? (o/n) : ");
+    if($position == "o"){
+        if($grille[$l][$c] == "." and $grille[$l][$c+1] == "." and $grille[$l][$c+2] == "." and $grille[$l][$c+3] == "."){
+            $grille[$l][$c] = "H";
+            $grille[$l][$c+1] = "C";
+            $grille[$l][$c+2] = "C";
+            $grille[$l][$c+3] = "C";
+        }
+        else{
+            echo "vous ne pouvez pas placer votre bateau ici\n";
+        }
+    }
+    elseif($position == "n"){
+        if($grille[$l][$c] == "." and $grille[$l+1][$c] == "." and $grille[$l+3][$c] == "." and $grille[$l+3][$c] == "."){
+            $grille[$l][$c] = "H";
+            $grille[$l+1][$c] = "C";
+            $grille[$l+2][$c] = "C";
+            $grille[$l+3][$c] = "C";
         }
         else{
             echo "vous ne pouvez pas placer votre bateau ici\n";
