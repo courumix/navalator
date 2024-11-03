@@ -21,10 +21,10 @@ function initialisegrille(){
 function tire($l,$c,&$blindgrille, $grille, &$point){
         if($blindgrille[$l-1][$c-1] != "X" and $blindgrille[$l-1][$c-1] != "O"){
             if($grille[$l-1][$c-1] == "H" or $grille[$l-1][$c-1] == "T" or $grille[$l-1][$c-1] == "C" or $grille[$l-1][$c-1] == "c" or $grille[$l-1][$c-1] == "P"){
-                echo "Toucher\n";
+                echo "Toucher vous pouvez rejouer\n";
                 $blindgrille[$l-1][$c-1] = "X";
                 $point = $point + 1;
-                return true;
+                return false;
             }
             else{
                 echo "Plouf\n";
@@ -240,14 +240,20 @@ while ($jeu){
     readline("J2 tapez sur entrez pour laisser la place à J1 : \n");
     echo".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n";
     while($pointJ1 < 17 or $pointJ2 < 17){
-        echo"voici le terrain de vôtre adversaire\n";
-        affichetab($BlindTabJ2,10,10);
-        echo"J1 à vous de tiré\n";
         $verif = false;
         while ($verif != true){
+            echo"voici le terrain de vôtre adversaire\n";
+            affichetab($BlindTabJ2,10,10);
+            echo"J1 à vous de tiré\n";
             $l = (int)readline("Sur quelle ligne voulez vous tiré ? : ");
             $c = (int)readline("Sur quelle colonne voulez vous tiré ? : ");
-            $verif = tire($l,$c,$BlindTabJ2,$TabJ2,$pointJ1);
+            if ($l < 1 or $l > 10){
+                echo"la valeur n'est pas correct\n";
+                $verif = false;
+            }
+            else{
+                $verif = tire($l,$c,$BlindTabJ2,$TabJ2,$pointJ1);
+            }
         }
         echo"voici le nouveau terrain de vôtre adversaire\n";
         affichetab($BlindTabJ2,10,10);
@@ -256,14 +262,20 @@ while ($jeu){
         }
         readline("J1 tapez sur entrez pour laisser la place à J2 : \n");
         echo".\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n";
-        echo"voici le terrain de vôtre adversaire\n";
-        affichetab($BlindTabJ1,10,10);
-        echo"J2 à vous de tiré\n";
         $verif = false;
         while ($verif != true){
+            echo"voici le terrain de vôtre adversaire\n";
+            affichetab($BlindTabJ1,10,10);
+            echo"J2 à vous de tiré\n";
             $l = (int)readline("Sur quelle ligne voulez vous tiré ? : ");
             $c = (int)readline("Sur quelle colonne voulez vous tiré ? : ");
-            $verif = tire($l,$c,$BlindTabJ1,$TabJ1,$pointJ2);
+            if ($l < 1 or $l > 10){
+                echo"la valeur n'est pas correct\n";
+                $verif = false;
+            }
+            else{
+                $verif = tire($l,$c,$BlindTabJ1,$TabJ1,$pointJ2);
+            }
         }
         echo"voici le nouveau terrain de vôtre adversaire\n";
         affichetab($BlindTabJ1,10,10);
@@ -281,10 +293,5 @@ while ($jeu){
     }
     $jeu = false;
 }
-
-#$grilleJ1 = initialisegrille();
-#affichetab($grilleJ1, 10, 10);
-#positionnetorpilleur($grilleJ1);
-#affichetab($grilleJ1,10 ,10);
 
 ?>
