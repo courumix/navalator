@@ -247,12 +247,15 @@ while ($jeu){
             echo"J1 à vous de tiré\n";
             $l = (int)readline("Sur quelle ligne voulez vous tiré ? : ");
             $c = (int)readline("Sur quelle colonne voulez vous tiré ? : ");
-            if ($l < 1 or $l > 10){
+            if (($l < 1 or $l > 10) or ($c < 1 or $c > 10)){
                 echo"la valeur n'est pas correct\n";
                 $verif = false;
             }
             else{
                 $verif = tire($l,$c,$BlindTabJ2,$TabJ2,$pointJ1);
+            }
+            if ($pointJ1 >= 17){
+                break;
             }
         }
         echo"voici le nouveau terrain de vôtre adversaire\n";
@@ -269,12 +272,15 @@ while ($jeu){
             echo"J2 à vous de tiré\n";
             $l = (int)readline("Sur quelle ligne voulez vous tiré ? : ");
             $c = (int)readline("Sur quelle colonne voulez vous tiré ? : ");
-            if ($l < 1 or $l > 10){
+            if (($l < 1 or $l > 10) or ($c < 1 or $c > 10)){
                 echo"la valeur n'est pas correct\n";
                 $verif = false;
             }
             else{
                 $verif = tire($l,$c,$BlindTabJ1,$TabJ1,$pointJ2);
+            }
+            if ($pointJ2 >= 17){
+                break;
             }
         }
         echo"voici le nouveau terrain de vôtre adversaire\n";
